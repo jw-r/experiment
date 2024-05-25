@@ -8,7 +8,9 @@ export default function KeypadIssue() {
   const [keypadHeight, setKeypadHeight] = useState<number | null>(null)
 
   useEffect(() => {
-    const timerId = setTimeout(() => {
+    if (!window.visualViewport) return
+
+    const handleResize = () => {
       const windowInnerHeight = window.innerHeight
       const visualViewportHeight = window.visualViewport!.height
 
@@ -19,9 +21,10 @@ export default function KeypadIssue() {
       if (diff > 0) {
         setKeypadHeight(diff)
       }
-    }, 800)
+    }
 
-    return () => clearTimeout(timerId)
+    window.visualViewport.addEventListener('resize', handleResize)
+    return () => window.visualViewport!.removeEventListener('resize', handleResize)
   }, [isFocus])
 
   return (
@@ -80,4 +83,8 @@ const timerId = setTimeout(() => {
 
 return () => clearTimeout(timerId)
 }, [isFocus])
+ */
+
+/**
+ * window.visualViewport.addEventListener를 통해 구현할 수 있네?
  */

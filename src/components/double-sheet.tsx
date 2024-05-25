@@ -31,7 +31,7 @@ export default function DoubleSheet() {
               <div className="size-[80px] bg-gray-200" />
             </div>
           </SheetTrigger>
-          <SheetContent side="bottom" className="rounded-t-[12px] min-h-screen">
+          <SheetContent side="bottom" className="min-h-screen">
             ok
           </SheetContent>
         </Sheet>
