@@ -94,7 +94,7 @@
 .make-scrollable {
   position: absolute;
   left: 0;
-  width: 100%;
+  width: 1px;
   height: calc(100% + 1px);
 }
 
