@@ -80,3 +80,17 @@
     @apply fixed right-1/2 bottom-1/2 translate-x-1/2 translate-y-1/2;
   }
 }
+
+:root {
+  --vh: 1vh;
+}
+
+/* .safe-viewport-height {
+  height: calc(var(--vh) * 100);
+  background-color: red;
+} */
+body {
+  height: calc(var(--vh) * 100);
+  background-color: red;
+  position: relative;
+}

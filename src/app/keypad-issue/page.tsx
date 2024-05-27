@@ -5,25 +5,44 @@ import { useEffect, useState } from 'react'
 
 export default function KeypadIssue() {
   const [keypadHeight, setKeypadHeight] = useState<number | null>(null)
+
+  /**
+   * SOLUTION 1
+   */
+  // useEffect(() => {
+  //   if (!window.visualViewport) return
+
+  //   const handleResize = () => {
+  //     const windowInnerHeight = window.innerHeight
+  //     const visualViewportHeight = window.visualViewport!.height
+  //     const diff = windowInnerHeight - visualViewportHeight
+  //     if (diff > 0) {
+  //       setKeypadHeight(diff)
+  //     } else {
+  //       setKeypadHeight(0)
+  //     }
+  //   }
+
+  //   // safari에서는 resize 이벤트 트리거까지 약 500ms 정도가 소요된다
+  //   window.visualViewport.addEventListener('resize', handleResize)
+  //   return () => window.visualViewport!.removeEventListener('resize', handleResize)
+  // }, [])
+
+  /**
+   * SOLUTION 2
+   */
   useEffect(() => {
-    if (!window.visualViewport) return
-
-    const handleResize = () => {
-      const windowInnerHeight = window.innerHeight
-      const visualViewportHeight = window.visualViewport!.height
-
-      const diff = windowInnerHeight - visualViewportHeight
-
-      if (diff > 0) {
-        setKeypadHeight(diff)
-      } else {
-        setKeypadHeight(0)
-      }
+    function setVh() {
+      document.documentElement.style.setProperty(
+        '--vh',
+        `${window.visualViewport!.height * 0.01}px`
+      )
     }
 
-    // safari에서는 resize 이벤트 트리거까지 약 500ms 정도가 소요된다
-    window.visualViewport.addEventListener('resize', handleResize)
-    return () => window.visualViewport!.removeEventListener('resize', handleResize)
+    setVh()
+
+    window.visualViewport!.addEventListener('resize', setVh)
+    return () => window.visualViewport!.removeEventListener('resize', setVh)
   }, [])
 
   return (
@@ -38,6 +57,12 @@ export default function KeypadIssue() {
 
 // 키패드 표시에 따라 Y 스크롤이 발생하는 문제
 // 웹앱에서 safe-viewport 구하기
+
+// useDetectKeyboardOpen 라이브러리도 있네
+// on-screen-keyboard-detector 이런것도 있고
+// visualViewport의 지원률이 95% 이상이라 사용해도 무방해보임
+
+// 근대 radix-ui의 form은 fixed인데, 왜 자동으로 위치가 조정되는거야? (안될 때가 가끔 있음)
 
 /**
  * Fixed 된 요소가 모바일 환경에서 가상 keypad에 가려지는 문제
