@@ -46,11 +46,13 @@ export default function KeypadIssue() {
   }, [])
 
   return (
-    <div>
-      <div className="w-full p-10 bg-blue-200">
-        <input />
+    <div className="safe-viewport-height">
+      <div className="make-scrollable">
+        <div className="w-full p-10 bg-blue-200">
+          <input />
+        </div>
+        <FixedBottomButton keypadHeight={keypadHeight}>클릭</FixedBottomButton>
       </div>
-      <FixedBottomButton keypadHeight={keypadHeight}>클릭</FixedBottomButton>
     </div>
   )
 }
