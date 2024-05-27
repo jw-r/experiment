@@ -4,9 +4,7 @@ import FixedBottomButton from '@/components/fixed-bottom-button'
 import { useEffect, useState } from 'react'
 
 export default function KeypadIssue() {
-  const [isFocus, setIsFocus] = useState({ value: false })
   const [keypadHeight, setKeypadHeight] = useState<number | null>(null)
-
   useEffect(() => {
     if (!window.visualViewport) return
 
@@ -15,38 +13,31 @@ export default function KeypadIssue() {
       const visualViewportHeight = window.visualViewport!.height
 
       const diff = windowInnerHeight - visualViewportHeight
-      if (isFocus.value === false) {
-        setKeypadHeight(0)
-      }
+
       if (diff > 0) {
         setKeypadHeight(diff)
+      } else {
+        setKeypadHeight(0)
       }
     }
 
+    // safari에서는 resize 이벤트 트리거까지 약 500ms 정도가 소요된다
     window.visualViewport.addEventListener('resize', handleResize)
     return () => window.visualViewport!.removeEventListener('resize', handleResize)
-  }, [isFocus])
+  }, [])
 
   return (
     <div>
       <div className="w-full p-10 bg-blue-200">
-        <input
-          onFocus={() => {
-            setIsFocus({
-              value: true,
-            })
-          }}
-          onBlur={() => {
-            setIsFocus({
-              value: false,
-            })
-          }}
-        />
+        <input />
       </div>
       <FixedBottomButton keypadHeight={keypadHeight}>클릭</FixedBottomButton>
     </div>
   )
 }
+
+// 키패드 표시에 따라 Y 스크롤이 발생하는 문제
+// 웹앱에서 safe-viewport 구하기
 
 /**
  * Fixed 된 요소가 모바일 환경에서 가상 keypad에 가려지는 문제
@@ -88,3 +79,5 @@ return () => clearTimeout(timerId)
 /**
  * window.visualViewport.addEventListener를 통해 구현할 수 있네?
  */
+
+// keypad가 사라질 때는 visualViewport의 resize 이벤트가 트리거되지 않는다 -> 라고 생각했지만 된다
