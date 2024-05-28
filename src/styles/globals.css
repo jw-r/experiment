@@ -80,3 +80,24 @@
     @apply fixed right-1/2 bottom-1/2 translate-x-1/2 translate-y-1/2;
   }
 }
+
+:root {
+  --vh: 1vh;
+}
+
+.safe-viewport-height {
+  height: calc(var(--vh) * 100);
+  position: relative;
+}
+
+.make-scrollable {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: calc(100% + 1px);
+}
+
+.safe-viewport-content {
+  height: 100%;
+  overflow-y: auto;
+}

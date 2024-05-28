@@ -10,6 +10,34 @@ export default function KeypadIssue() {
         <input />
       </div>
       <FixedBottomButton>클릭</FixedBottomButton>
+      <div className="w-full bg-red-300 opacity-60 container gap-[30px] flex flex-col">
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+        <div>오킹</div>
+      </div>
     </SafeViewport>
   )
 }

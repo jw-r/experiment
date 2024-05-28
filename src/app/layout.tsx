@@ -1,5 +1,5 @@
 import '@/styles/globals.css'
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 
 import { cn } from '@/lib/utils'
@@ -12,6 +12,13 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
   title: 'Design System',
   description: '',
+}
+
+export const viewport: Viewport = {
+  initialScale: 1.0,
+  userScalable: false,
+  maximumScale: 1.0,
+  minimumScale: 1.0,
 }
 
 export default function RootLayout({
