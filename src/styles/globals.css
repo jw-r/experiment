@@ -80,28 +80,3 @@
     @apply fixed right-1/2 bottom-1/2 translate-x-1/2 translate-y-1/2;
   }
 }
-
-:root {
-  --vh: 1vh;
-}
-
-.safe-viewport-height {
-  height: calc(var(--vh) * 100);
-  position: relative;
-  overflow-y: auto;
-}
-
-.make-scrollable {
-  position: absolute;
-  left: 0;
-  width: 1px;
-  height: calc(100% + 1px);
-}
-
-/* body {
-  height: calc(var(--vh) * 100);
-  position: relative;
-} */
-body {
-  height: 100%;
-}

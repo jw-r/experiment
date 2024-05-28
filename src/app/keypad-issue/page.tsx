@@ -1,58 +1,16 @@
 'use client'
 
 import FixedBottomButton from '@/components/fixed-bottom-button'
-import { useEffect, useState } from 'react'
+import SafeViewport from '@/components/safe-viewport'
 
 export default function KeypadIssue() {
-  const [keypadHeight, setKeypadHeight] = useState<number | null>(null)
-
-  /**
-   * SOLUTION 1
-   */
-  // useEffect(() => {
-  //   if (!window.visualViewport) return
-
-  //   const handleResize = () => {
-  //     const windowInnerHeight = window.innerHeight
-  //     const visualViewportHeight = window.visualViewport!.height
-  //     const diff = windowInnerHeight - visualViewportHeight
-  //     if (diff > 0) {
-  //       setKeypadHeight(diff)
-  //     } else {
-  //       setKeypadHeight(0)
-  //     }
-  //   }
-
-  //   // safari에서는 resize 이벤트 트리거까지 약 500ms 정도가 소요된다
-  //   window.visualViewport.addEventListener('resize', handleResize)
-  //   return () => window.visualViewport!.removeEventListener('resize', handleResize)
-  // }, [])
-
-  /**
-   * SOLUTION 2
-   */
-  useEffect(() => {
-    function setVh() {
-      document.documentElement.style.setProperty(
-        '--vh',
-        `${window.visualViewport!.height * 0.01}px`
-      )
-    }
-
-    setVh()
-
-    window.visualViewport!.addEventListener('resize', setVh)
-    return () => window.visualViewport!.removeEventListener('resize', setVh)
-  }, [])
-
   return (
-    <div className="safe-viewport-height">
-      <div className="make-scrollable" />
+    <SafeViewport>
       <div className="w-full p-10 bg-blue-200">
         <input />
       </div>
-      <FixedBottomButton keypadHeight={keypadHeight}>클릭</FixedBottomButton>
-    </div>
+      <FixedBottomButton>클릭</FixedBottomButton>
+    </SafeViewport>
   )
 }
 
@@ -107,3 +65,42 @@ return () => clearTimeout(timerId)
  */
 
 // keypad가 사라질 때는 visualViewport의 resize 이벤트가 트리거되지 않는다 -> 라고 생각했지만 된다
+
+/**
+ * SOLUTION 1
+ */
+// useEffect(() => {
+//   if (!window.visualViewport) return
+
+//   const handleResize = () => {
+//     const windowInnerHeight = window.innerHeight
+//     const visualViewportHeight = window.visualViewport!.height
+//     const diff = windowInnerHeight - visualViewportHeight
+//     if (diff > 0) {
+//       setKeypadHeight(diff)
+//     } else {
+//       setKeypadHeight(0)
+//     }
+//   }
+
+//   // safari에서는 resize 이벤트 트리거까지 약 500ms 정도가 소요된다
+//   window.visualViewport.addEventListener('resize', handleResize)
+//   return () => window.visualViewport!.removeEventListener('resize', handleResize)
+// }, [])
+
+/**
+ * SOLUTION 2
+ */
+// useEffect(() => {
+//   function setVh() {
+//     document.documentElement.style.setProperty(
+//       '--vh',
+//       `${window.visualViewport!.height * 0.01}px`
+//     )
+//   }
+
+//   setVh()
+
+//   window.visualViewport!.addEventListener('resize', setVh)
+//   return () => window.visualViewport!.removeEventListener('resize', setVh)
+// }, [])

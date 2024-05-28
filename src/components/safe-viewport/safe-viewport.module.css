@@ -1,0 +1,12 @@
+.safeViewportHeight {
+  height: calc(var(--safe-viewport-vh, 1vh) * 100);
+  position: relative;
+  overflow-y: auto;
+}
+
+.makeScrollable {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: calc(100% + 1px);
+}
