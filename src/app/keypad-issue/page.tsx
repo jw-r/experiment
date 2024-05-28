@@ -9,35 +9,12 @@ export default function KeypadIssue() {
       <div className="w-full p-10 bg-blue-200">
         <input />
       </div>
-      <FixedBottomButton>클릭</FixedBottomButton>
-      <div className="w-full bg-red-300 opacity-60 container gap-[30px] flex flex-col">
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
-        <div>오킹</div>
+      <div className="flex flex-col gap-[10px]">
+        {Array.from({ length: 50 }).map((_, i) => (
+          <li key={i}>item: {i + 1}</li>
+        ))}
       </div>
+      <FixedBottomButton>클릭</FixedBottomButton>
     </SafeViewport>
   )
 }

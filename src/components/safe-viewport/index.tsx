@@ -1,7 +1,8 @@
 'use client'
 
 import { PropsWithChildren, useEffect, useState } from 'react'
-import throttle from 'lodash.throttle'
+import debounce from 'lodash.debounce'
+import styles from './safe-viewport.module.css'
 
 interface Props extends PropsWithChildren {
   makeScrollable?: boolean
@@ -19,7 +20,7 @@ export default function SafeViewport({ children }: Props) {
 
     function handleResize() {
       document.documentElement.style.setProperty(
-        '--vh',
+        '--safe-viewport-vh',
         `${window.visualViewport!.height * 0.01}px`
       )
 
@@ -32,21 +33,21 @@ export default function SafeViewport({ children }: Props) {
 
     handleResize()
 
-    const throttledHandleResize = throttle(handleResize, 200)
+    const debouncedHandleResize = debounce(handleResize, 100)
 
-    window.visualViewport!.addEventListener('resize', throttledHandleResize)
+    window.visualViewport!.addEventListener('resize', debouncedHandleResize)
     document.documentElement.setAttribute('data-viewport-listener', 'true')
 
     return () => {
-      window.visualViewport!.removeEventListener('resize', throttledHandleResize)
+      window.visualViewport!.removeEventListener('resize', debouncedHandleResize)
       document.documentElement.setAttribute('data-viewport-listener', 'false')
     }
   }, [])
 
   return (
-    <div className="safe-viewport-height">
-      {isKeypadOpen && <div className="make-scrollable" />}
-      <div className="safe-viewport-content">{children}</div>
+    <div className={styles.safeViewportContainer}>
+      {isKeypadOpen && <div className={styles.makeScrollable} />}
+      <div className={styles.safeViewportContent}>{children}</div>
     </div>
   )
 }
