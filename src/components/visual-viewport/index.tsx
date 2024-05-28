@@ -2,15 +2,15 @@
 
 import { PropsWithChildren, useEffect, useState } from 'react'
 import debounce from 'lodash.debounce'
-import styles from './safe-viewport.module.css'
+import styles from './visual-viewport.module.css'
 
 interface Props extends PropsWithChildren {
-  makeScrollable?: boolean
+  hideYScrollbar?: boolean
 }
 
 const minKeypadHeight = 300
 
-export default function SafeViewport({ children }: Props) {
+export default function VisualViewport({ children, hideYScrollbar }: Props) {
   const [isKeypadOpen, setIsKeypadOpen] = useState(false)
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function SafeViewport({ children }: Props) {
 
     function handleResize() {
       document.documentElement.style.setProperty(
-        '--safe-viewport-vh',
+        '--visual-viewport-vh',
         `${window.visualViewport!.height * 0.01}px`
       )
 
@@ -45,9 +45,14 @@ export default function SafeViewport({ children }: Props) {
   }, [])
 
   return (
-    <div className={styles.safeViewportContainer}>
+    <div className={styles.visualViewportContainer}>
       {isKeypadOpen && <div className={styles.makeScrollable} />}
-      <div className={styles.safeViewportContent}>{children}</div>
+      <div
+        className={styles.visualViewportContent}
+        data-hide-y-scrollbar={hideYScrollbar ? 'true' : 'false'}
+      >
+        {children}
+      </div>
     </div>
   )
 }

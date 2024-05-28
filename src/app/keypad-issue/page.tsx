@@ -1,11 +1,11 @@
 'use client'
 
 import FixedBottomButton from '@/components/fixed-bottom-button'
-import SafeViewport from '@/components/safe-viewport'
+import VisualViewport from '@/components/visual-viewport'
 
 export default function KeypadIssue() {
   return (
-    <SafeViewport>
+    <VisualViewport hideYScrollbar>
       <div className="w-full p-10 bg-blue-200">
         <input />
       </div>
@@ -15,7 +15,7 @@ export default function KeypadIssue() {
         ))}
       </div>
       <FixedBottomButton>클릭</FixedBottomButton>
-    </SafeViewport>
+    </VisualViewport>
   )
 }
 
