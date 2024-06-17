@@ -3,6 +3,7 @@ import { Metadata, Viewport } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 
 import { cn } from '@/lib/utils'
+import VisualViewport from '@/components/visual-viewport'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -28,7 +29,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(fontSans.variable)}>{children}</body>
+      <body className={cn(fontSans.variable)}>
+        <VisualViewport hideYScrollbar>{children}</VisualViewport>
+      </body>
     </html>
   )
 }
